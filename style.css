@@ -39,7 +39,9 @@ header {
 }
 
 .header-red-container {
+    position: relative;
     background-color: var(--vermelho);
+    z-index: 10;
     width: 100vw;
     display: flex;
     height: 35px;
@@ -49,13 +51,14 @@ header {
     align-items: center;
 }
 
-.header-red-container > a {
+.header-red-container>a {
     text-decoration: none;
     font-weight: 550;
     color: var(--branco);
 }
 
-.header-red-container > button, .header-white-container > button {
+.header-red-container>button,
+.header-white-container>button {
     width: var(--header-icon-size);
     height: var(--header-icon-size);
     font-size: var(--header-icon-size);
@@ -78,12 +81,15 @@ header {
 }
 
 .header-white-container {
+    position: relative;
     background-color: var(--branco);
     box-shadow: var(--sombra-padrao);
     padding: .5%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 10;
+
 }
 
 .return-button {
@@ -106,7 +112,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 /* Inserindo a imagem de fundo */
@@ -125,6 +131,7 @@ main::before {
     opacity: 0.2;
     z-index: -1;
 }
+
 /* Animação do texto "Senai ID */
 .senai-id {
     position: relative;
@@ -133,7 +140,8 @@ main::before {
     text-decoration: none;
 }
 
-.senai-id::after {
+.senai-id::after,
+.update-link::after {
     content: '';
     position: absolute;
     left: 0;
@@ -146,8 +154,13 @@ main::before {
     transition: transform 0.3s ease;
 }
 
-.senai-id:hover::after{
+.senai-id:hover::after,
+.update-link:hover::after {
     transform: scaleX(1);
+}
+
+.update-link:hover {
+    color: var(--vermelho);
 }
 
 .inf-header {
@@ -160,7 +173,9 @@ main::before {
 .update-link {
     color: var(--cinza);
     text-decoration: none;
+    position: relative;
 }
+
 
 .notifications-header {
     position: relative;
@@ -185,13 +200,18 @@ main::before {
     gap: 50px;
 }
 
+.mobile-menu {
+    display: none;
+}
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
 
     /* Ocultar links padrão no header e mostrar o botão do menu hamburger */
     .inf-header,
     .profile-div {
-        display: none; /* Oculta os links de navegação padrão */
+        display: none;
+        /* Oculta os links de navegação padrão */
     }
 
     .hamburger-menu {
@@ -200,15 +220,17 @@ main::before {
 
     /* Estilo do menu suspenso para dispositivos móveis */
     .mobile-menu {
-        display: none;
+        transform: translateY(-900px);
+        transition: transform 1s ease;
+        position: sticky;
+        display: flex;
         flex-direction: column;
         color: var(--branco);
-        position: absolute;
         top: 80px;
         left: 0;
         width: 100vw;
         box-shadow: var(--sombra-padrao);
-        z-index: 1000;
+        z-index: 4;
     }
 
     .mobile-menu a {
@@ -225,8 +247,8 @@ main::before {
 
     /* Mostrar o menu quando ativo */
     .mobile-menu.active {
-        display: flex;
+        transform: translateY(0px);
     }
 }
-/* Página de login (index.html) */
 
+/* Página de login (index.html) */
